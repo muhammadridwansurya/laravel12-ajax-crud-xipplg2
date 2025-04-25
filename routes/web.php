@@ -1,11 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\SignController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItemController;
 
-Route::get('/', [LoginController::class, 'index']);
-Route::get('/signin/{displayName}', [SignController::class, 'signin']);
-Route::get('/signout', [SignController::class, 'signout']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/', function () {
+    return view('beranda', ['title' => 'Beranda']);
+});
+
+Route::get('/items', [ItemController::class, 'index']);
+Route::get('/items/get_data', [ItemController::class, 'getData']);
+Route::get('/items/{idItem}', [ItemController::class, 'getDataById']);
+Route::post('/items/form', [ItemController::class, 'storeData']);
+Route::put('/items/form/{idItem}', [ItemController::class, 'updateData']);
+Route::delete('/items/form/{idItem}', [ItemController::class, 'destroyData']);
+
